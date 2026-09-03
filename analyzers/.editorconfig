@@ -1,0 +1,4 @@
+# Lockerungen für das Analyzer-Projekt: Roslyn-Analyzer koppeln zwangsläufig an viele Compiler-Typen.
+[*.cs]
+dotnet_diagnostic.CA1506.severity = none     # Klassenkopplung
+dotnet_diagnostic.RS2008.severity = none     # Release-Tracking ist über AnalyzerReleases.*.md gepflegt

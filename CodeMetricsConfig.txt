@@ -1,0 +1,12 @@
+# Schwellenwerte für die .NET-Code-Metrik-Regeln (CA1502, CA1505, CA1506).
+# Format: RuleId: Wert  oder  RuleId(SymbolKind): Wert   mit SymbolKind = Assembly|Namespace|Type|Method|Field|Property|Event
+
+# Zyklomatische Komplexität pro Methode
+CA1502: 5
+
+# Wartbarkeitsindex (0–100, höher ist besser); unter diesem Wert Fehler
+CA1505: 20
+
+# Klassenkopplung (SRP): Anzahl unterschiedlicher referenzierter Typen
+CA1506(Type): 12
+CA1506(Method): 8

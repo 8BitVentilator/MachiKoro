@@ -1,0 +1,8 @@
+# Lockerungen nur für Testprojekte. Alles andere erbt aus der Wurzel-.editorconfig.
+[*.cs]
+dotnet_diagnostic.CA1707.severity = none     # Unterstriche in Testnamen: Methode_Szenario_Erwartung
+dotnet_diagnostic.CA1515.severity = none     # Testklassen müssen public sein
+dotnet_diagnostic.CA1861.severity = none     # konstante Arrays in Theory-Daten
+dotnet_diagnostic.CA1859.severity = none     # konkrete Typen in Tests unnötig
+dotnet_diagnostic.CA1506.severity = none     # Tests koppeln bewusst an viele Typen
+dotnet_diagnostic.MA0048.severity = none     # mehrere Testklassen pro Datei erlaubt

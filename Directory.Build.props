@@ -1,0 +1,35 @@
+<Project>
+
+  <!-- Gilt für alle Projekte der Solution. Projektspezifisches gehört in die jeweilige .csproj. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <!-- Quality Gate: jede Warnung ist ein Build-Fehler, Style-Regeln werden im Build geprüft. -->
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest-all</AnalysisLevel>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <!-- IDE0005 (unnötige usings) wird im Build nur mit Dokumentationsdatei geprüft; CS1591 (fehlender XML-Kommentar) bleibt aus. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <!--
+    Analyzer (alle MIT oder Apache-2.0). Schweregrade: .editorconfig, Metrik-Grenzwerte: CodeMetricsConfig.txt.
+    Object-Calisthenics-Regeln kommen aus dem eigenen Projekt analyzers/MachiKoro.Analyzers (siehe src/Directory.Build.props).
+  -->
+  <ItemGroup>
+    <PackageReference Include="Meziantou.Analyzer" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers" />
+    <PackageReference Include="Roslynator.Analyzers" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers" />
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)CodeMetricsConfig.txt" Link="CodeMetricsConfig.txt" Visible="false" />
+  </ItemGroup>
+
+</Project>

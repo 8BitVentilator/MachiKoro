@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>MachiKoro.Domain</RootNamespace>
+    <Description>Spielregeln und Domänenmodell von Machi Koro. Keine Abhängigkeiten nach außen.</Description>
+  </PropertyGroup>
+
+</Project>

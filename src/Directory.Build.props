@@ -1,0 +1,13 @@
+<Project>
+
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+  <!-- Alle Produktionsprojekte unter src/ werden von den projekteigenen Object-Calisthenics-Analyzern geprüft. -->
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../analyzers/MachiKoro.Analyzers/MachiKoro.Analyzers.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false"
+                      PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>
