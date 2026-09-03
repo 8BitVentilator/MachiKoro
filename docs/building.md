@@ -48,34 +48,35 @@ Analyzer: `Microsoft.CodeAnalysis.NetAnalyzers` (im SDK, MIT), `Meziantou.Analyz
 
 xUnit v3 läuft auf Microsoft.Testing.Platform. Die Testprojekte sind ausführbar, `dotnet test` ist über `global.json` auf den neuen Runner gestellt. Alternativ startet `dotnet run --project tests/MachiKoro.Domain.Tests` die Tests direkt.
 
-## Quality Gate über Claude-Code-Hooks
+## Quality Gate über Claude-Code- und Opencode-Hooks
 
-Konfiguriert in `.claude/settings.json`, Skripte in `.claude/hooks/`.
+Claude Code ist in `.claude/settings.json` konfiguriert, Opencode über `.opencode/plugins/quality-gate.ts`. Beide Varianten verwenden dieselben Skripte in `.claude/hooks/`.
 
-### PostToolUse (`format-file.ps1`)
+### Dateiänderungen (`format-file.ps1`)
 
-Läuft nach jedem `Write` oder `Edit` einer `.cs`-Datei:
+Läuft nach jedem `Write` oder `Edit` einer `.cs`-Datei. In Opencode wird der Hook über `tool.execute.after` ausgelöst:
 
 1. formatiert die Datei mit `dotnet format whitespace --include <Datei>`,
 2. legt den Marker `.claude/.quality-gate-pending` an.
 
-Still, blockiert nie. Die vollständige Formatierung mit Style- und Analyzer-Fixes braucht einen Build und passiert im Stop-Hook.
+Still, blockiert nie. Die vollständige Formatierung mit Style- und Analyzer-Fixes braucht einen Build und passiert beim Abschluss-Hook.
 
-### Stop (`quality-gate.ps1`)
+### Abschluss (`quality-gate.ps1`)
 
-Läuft, wenn Claude einen Turn beenden will, aber nur wenn der Marker existiert. Reihenfolge:
+Läuft, wenn Claude einen Turn beenden will oder Opencode eine Session als idle meldet, aber nur wenn der Marker existiert. Reihenfolge:
 
 1. `dotnet format` (alle Fixes anwenden)
 2. `dotnet build` (Analyzer als Fehler)
 3. `dotnet test`
 
-Schlägt ein Schritt fehl, wird der Stop blockiert und Claude erhält die Fehlerausgabe mit dem Auftrag, den Code umzubauen statt Regeln zu unterdrücken. Nach 3 vergeblichen Versuchen in Folge wird der Stop durchgelassen, damit keine Endlosschleife entsteht. Der Marker bleibt, das Gate läuft beim nächsten Stop wieder.
+Schlägt ein Schritt fehl, wird der Stop in Claude Code blockiert und Claude erhält die Fehlerausgabe mit dem Auftrag, den Code umzubauen statt Regeln zu unterdrücken. In Opencode zeigt das Plugin eine Fehlermeldung an und fügt die Fehlerausgabe als Kontext in die Session ein; einen echten Stop-Blocker bietet Opencode nicht. Nach 3 vergeblichen Versuchen in Folge wird der Abschluss durchgelassen, damit keine Endlosschleife entsteht. Der Marker bleibt, das Gate läuft beim nächsten Abschluss wieder.
 
 Nach einem grünen Lauf wird der Marker gelöscht, bis zur nächsten C#-Änderung läuft das Gate nicht.
 
 ### Hooks prüfen oder ändern
 
 - `/hooks` in Claude Code zeigt die aktiven Hooks.
+- Opencode lädt `.opencode/plugins/quality-gate.ts` beim Start automatisch. Nach Änderungen an `opencode.json` oder `.opencode/plugins/` muss Opencode neu gestartet werden.
 - Manuell testen:
 
 ```bash
@@ -83,7 +84,7 @@ echo '{"tool_name":"Edit","tool_input":{"file_path":"src/MachiKoro.Domain/Econom
 echo '{"session_id":"manual"}' | pwsh -NoProfile -File .claude/hooks/quality-gate.ps1
 ```
 
-Beide Skripte lesen das Hook-JSON von stdin und ermitteln das Projektverzeichnis aus `CLAUDE_PROJECT_DIR` oder, falls nicht gesetzt, aus ihrem eigenen Speicherort.
+Beide Skripte lesen das Hook-JSON von stdin und ermitteln das Projektverzeichnis aus `CLAUDE_PROJECT_DIR` oder, falls nicht gesetzt, aus ihrem eigenen Speicherort. Das Opencode-Plugin setzt `CLAUDE_PROJECT_DIR` beim Aufruf kompatibel auf das Worktree-Verzeichnis.
 
 ## CI
 

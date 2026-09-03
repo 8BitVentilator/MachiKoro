@@ -1,0 +1,230 @@
+# MachiKoro – Code-Style und Analyzer-Schweregrade
+# Formatierung wird durch `dotnet format` durchgesetzt (Hook nach jeder Dateiänderung + Quality Gate beim Abschluss).
+# Grenzwerte der .NET-Metrikregeln stehen in CodeMetricsConfig.txt, die der MK-Regeln in analyzers/MachiKoro.Analyzers/Rules.cs.
+
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{xml,props,targets,csproj,slnx,json,yml,yaml}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+###############################################################################
+# C#
+###############################################################################
+[*.cs]
+
+# --- Formatierung (IDE0055 = jede Abweichung ist ein Fehler) ------------------
+dotnet_diagnostic.IDE0055.severity = error
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_indent_labels = one_less_than_current
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+csharp_indent_case_contents_when_block = false
+csharp_space_after_cast = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_parentheses = false
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_after_comma = true
+csharp_space_after_dot = false
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_before_comma = false
+csharp_space_before_dot = false
+csharp_space_before_semicolon_in_for_statement = false
+csharp_space_around_declaration_statements = false
+csharp_space_before_open_square_brackets = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_square_brackets = false
+csharp_preserve_single_line_statements = false
+csharp_preserve_single_line_blocks = true
+
+# --- Sprachstil ----------------------------------------------------------------
+csharp_style_namespace_declarations = file_scoped:error
+dotnet_diagnostic.IDE0161.severity = error
+csharp_using_directive_placement = outside_namespace:error
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+dotnet_diagnostic.IDE0005.severity = error   # unnötige usings
+
+csharp_prefer_braces = true:error
+dotnet_diagnostic.IDE0011.severity = error
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = true:suggestion
+csharp_prefer_simple_using_statement = true:warning
+csharp_style_prefer_switch_expression = true:suggestion
+csharp_style_prefer_pattern_matching = true:suggestion
+csharp_style_pattern_matching_over_is_with_cast_check = true:warning
+csharp_style_pattern_matching_over_as_with_null_check = true:warning
+csharp_style_prefer_not_pattern = true:warning
+csharp_style_inlined_variable_declaration = true:warning
+csharp_style_throw_expression = true:suggestion
+csharp_style_conditional_delegate_call = true:warning
+csharp_style_prefer_primary_constructors = true:suggestion
+csharp_style_prefer_readonly_struct = true:error
+csharp_style_prefer_readonly_struct_member = true:error
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_properties = true:suggestion
+csharp_style_expression_bodied_accessors = true:suggestion
+csharp_style_expression_bodied_constructors = false:suggestion
+csharp_style_expression_bodied_lambdas = true:suggestion
+csharp_prefer_static_local_function = true:warning
+csharp_style_prefer_local_over_anonymous_function = true:warning
+csharp_style_unused_value_expression_statement_preference = discard_variable:suggestion
+csharp_style_unused_value_assignment_preference = discard_variable:warning
+
+dotnet_style_readonly_field = true:error
+dotnet_diagnostic.IDE0044.severity = error
+dotnet_style_require_accessibility_modifiers = always:error
+dotnet_diagnostic.IDE0040.severity = error
+dotnet_style_qualification_for_field = false:warning
+dotnet_style_qualification_for_property = false:warning
+dotnet_style_qualification_for_method = false:warning
+dotnet_style_qualification_for_event = false:warning
+dotnet_style_predefined_type_for_locals_parameters_members = true:error
+dotnet_style_predefined_type_for_member_access = true:error
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_prefer_collection_expression = when_types_loosely_match:warning
+dotnet_style_coalesce_expression = true:warning
+dotnet_style_null_propagation = true:warning
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warning
+dotnet_style_prefer_auto_properties = true:warning
+dotnet_style_prefer_conditional_expression_over_assignment = true:suggestion
+dotnet_style_prefer_conditional_expression_over_return = true:suggestion
+dotnet_style_prefer_compound_assignment = true:warning
+dotnet_style_prefer_simplified_boolean_expressions = true:warning
+dotnet_style_prefer_simplified_interpolation = true:warning
+dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:suggestion
+dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:suggestion
+dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:suggestion
+dotnet_style_parentheses_in_other_operators = never_if_unnecessary:suggestion
+dotnet_code_quality_unused_parameters = all:error
+dotnet_diagnostic.IDE0060.severity = error
+dotnet_diagnostic.IDE0051.severity = error   # ungenutzte private Member
+dotnet_diagnostic.IDE0052.severity = error   # private Member nie gelesen
+dotnet_remove_unnecessary_suppression_exclusions = none
+
+# --- Namenskonventionen ---------------------------------------------------------
+# OC 6: nicht abkürzen. Analyzer prüfen die Form, nicht die Bedeutung. Die Bedeutung prüft das Review.
+dotnet_diagnostic.IDE1006.severity = error
+
+dotnet_naming_rule.interfaces_start_with_i.symbols = interface_symbols
+dotnet_naming_rule.interfaces_start_with_i.style = i_prefix_pascal_case
+dotnet_naming_rule.interfaces_start_with_i.severity = error
+dotnet_naming_symbols.interface_symbols.applicable_kinds = interface
+dotnet_naming_style.i_prefix_pascal_case.required_prefix = I
+dotnet_naming_style.i_prefix_pascal_case.capitalization = pascal_case
+
+dotnet_naming_rule.type_parameters_start_with_t.symbols = type_parameter_symbols
+dotnet_naming_rule.type_parameters_start_with_t.style = t_prefix_pascal_case
+dotnet_naming_rule.type_parameters_start_with_t.severity = error
+dotnet_naming_symbols.type_parameter_symbols.applicable_kinds = type_parameter
+dotnet_naming_style.t_prefix_pascal_case.required_prefix = T
+dotnet_naming_style.t_prefix_pascal_case.capitalization = pascal_case
+
+dotnet_naming_rule.private_fields_underscore_camel.symbols = private_field_symbols
+dotnet_naming_rule.private_fields_underscore_camel.style = underscore_camel_case
+dotnet_naming_rule.private_fields_underscore_camel.severity = error
+dotnet_naming_symbols.private_field_symbols.applicable_kinds = field
+dotnet_naming_symbols.private_field_symbols.applicable_accessibilities = private, private_protected
+dotnet_naming_style.underscore_camel_case.required_prefix = _
+dotnet_naming_style.underscore_camel_case.capitalization = camel_case
+
+dotnet_naming_rule.constants_pascal.symbols = constant_symbols
+dotnet_naming_rule.constants_pascal.style = pascal_case
+dotnet_naming_rule.constants_pascal.severity = error
+dotnet_naming_symbols.constant_symbols.applicable_kinds = field, local
+dotnet_naming_symbols.constant_symbols.required_modifiers = const
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+dotnet_naming_rule.static_readonly_fields_pascal.symbols = static_readonly_field_symbols
+dotnet_naming_rule.static_readonly_fields_pascal.style = pascal_case
+dotnet_naming_rule.static_readonly_fields_pascal.severity = error
+dotnet_naming_symbols.static_readonly_field_symbols.applicable_kinds = field
+dotnet_naming_symbols.static_readonly_field_symbols.required_modifiers = static, readonly
+
+dotnet_naming_rule.async_methods_end_with_async.symbols = async_method_symbols
+dotnet_naming_rule.async_methods_end_with_async.style = async_suffix
+dotnet_naming_rule.async_methods_end_with_async.severity = error
+dotnet_naming_symbols.async_method_symbols.applicable_kinds = method
+dotnet_naming_symbols.async_method_symbols.required_modifiers = async
+dotnet_naming_style.async_suffix.required_suffix = Async
+dotnet_naming_style.async_suffix.capitalization = pascal_case
+
+dotnet_naming_rule.members_pascal.symbols = member_symbols
+dotnet_naming_rule.members_pascal.style = pascal_case
+dotnet_naming_rule.members_pascal.severity = error
+dotnet_naming_symbols.member_symbols.applicable_kinds = namespace, class, struct, enum, property, method, event, delegate
+dotnet_naming_symbols.member_symbols.applicable_accessibilities = *
+
+dotnet_naming_rule.parameters_and_locals_camel.symbols = parameter_local_symbols
+dotnet_naming_rule.parameters_and_locals_camel.style = camel_case
+dotnet_naming_rule.parameters_and_locals_camel.severity = error
+dotnet_naming_symbols.parameter_local_symbols.applicable_kinds = parameter, local
+dotnet_naming_style.camel_case.capitalization = camel_case
+
+# --- .NET-Analyzer (CA): latest-all ist aktiv, hier nur bewusste Ausnahmen --------
+dotnet_diagnostic.CA1303.severity = none     # Literale nicht lokalisieren (kein UI-Framework)
+dotnet_diagnostic.CA1062.severity = none     # Nullable Reference Types decken das ab
+dotnet_diagnostic.CA1812.severity = none     # interne Klassen ohne Instanziierung (Tests, DI)
+dotnet_diagnostic.CA1014.severity = none     # CLSCompliant-Attribut
+dotnet_diagnostic.CA2007.severity = none     # ConfigureAwait ist in Anwendungscode unnötig
+dotnet_diagnostic.CA5394.severity = none     # System.Random ist für Würfel richtig, kein Sicherheitskontext
+dotnet_diagnostic.CA1848.severity = none     # LoggerMessage-Delegates
+dotnet_diagnostic.CA1716.severity = none     # Bezeichner, die mit VB-Schlüsselwörtern kollidieren
+
+# --- Projekt-Analyzer MachiKoro.Analyzers (analyzers/) – Object Calisthenics ----------
+dotnet_diagnostic.MK0001.severity = error    # OC 8 – höchstens zwei Instanzvariablen (Felder + Auto-Properties)
+dotnet_diagnostic.MK0002.severity = error    # OC 7 – höchstens zehn Methoden pro Typ
+dotnet_diagnostic.MK0003.severity = error    # OC 2 – kein else
+dotnet_diagnostic.MK0004.severity = error    # OC 1 – eine Einrückungsebene (Kontrollfluss nicht verschachteln)
+dotnet_diagnostic.MK0005.severity = error    # OC 3/4 – höchstens drei Parameter
+dotnet_diagnostic.MK0006.severity = error    # OC 7 – höchstens 120 nicht-leere Zeilen pro Datei
+dotnet_diagnostic.MK0007.severity = error    # Zeilenlänge höchstens 120 Zeichen
+dotnet_diagnostic.MK0008.severity = error    # OC 5 – höchstens zwei &&, || oder ?: pro Ausdruck
+
+# --- .NET-Code-Metriken (Grenzwerte: CodeMetricsConfig.txt) ---------------------------
+dotnet_diagnostic.CA1502.severity = error    # zyklomatische Komplexität
+dotnet_diagnostic.CA1505.severity = error    # Wartbarkeitsindex
+dotnet_diagnostic.CA1506.severity = error    # SRP – Klassenkopplung
+dotnet_diagnostic.CA1051.severity = error    # OC 9 – keine sichtbaren Instanzfelder
+
+# --- Meziantou ---------------------------------------------------------------------
+dotnet_diagnostic.MA0004.severity = none     # ConfigureAwait
+dotnet_diagnostic.MA0007.severity = none     # Trailing comma
+dotnet_diagnostic.MA0048.severity = error    # Dateiname = Typname
+dotnet_diagnostic.MA0051.severity = error    # OC 7 – Methodenlänge
+MA0051.maximum_lines_per_method = 15
+MA0051.maximum_statements_per_method = 10
+MA0051.skip_local_functions = false
+
+# --- Roslynator (Unveränderlichkeit, tote Member) -------------------------------------
+dotnet_diagnostic.RCS1169.severity = error   # Feld readonly machen
+dotnet_diagnostic.RCS1170.severity = error   # Auto-Property read-only machen (OC 9: keine Setter)
+dotnet_diagnostic.RCS1213.severity = error   # ungenutzte Member entfernen
+dotnet_diagnostic.RCS1163.severity = error   # ungenutzte Parameter
+dotnet_diagnostic.RCS1036.severity = error   # unnötige Leerzeilen
