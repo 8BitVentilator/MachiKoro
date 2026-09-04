@@ -87,7 +87,8 @@ public Coins IncomeFor(DiceRoll roll) => _establishments.ActivatedBy(roll).Total
 - IDs werden mit dem NuGet-Paket `StronglyTypedId` erzeugt. Keine nackten `Guid`-Werte und keine handgeschriebenen ID-Wrapper.
 - Fehler in der Domäne sind Domänenausnahmen (`InvalidMoveException`) oder Ergebnistypen, keine `ArgumentException` aus der Tiefe.
 - Defensive Prüfungen (`ArgumentOutOfRangeException.ThrowIfNegative`) stehen an Systemgrenzen und in Fabrikmethoden, nicht in jeder Methode.
-- Kommentare erklären Spielregeln oder Entscheidungen, nie den Code selbst. XML-Doku nur, wo der Name nicht reicht.
+- Kommentare erklären Spielregeln oder Entscheidungen, nie den Code selbst.
+- Jede öffentliche Methode und Property besitzt einen XML-Dokumentationskommentar.
 - File-scoped Namespaces, `using` außerhalb des Namespaces, ein Typ pro Datei, Dateiname = Typname.
 
 ## Review-Checkliste
@@ -104,3 +105,4 @@ Vor dem Abschluss jeder Aufgabe für jeden geänderten Typ prüfen:
 - [ ] Ein Änderungsgrund pro Klasse (SRP)
 - [ ] Neues Verhalten als neuer Typ statt als neuer Zweig (OCP)
 - [ ] Domäne referenziert keine Infrastruktur (DIP)
+- [ ] Jede öffentliche Methode und Property besitzt einen XML-Dokumentationskommentar
