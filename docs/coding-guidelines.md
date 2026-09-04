@@ -84,6 +84,7 @@ public Coins IncomeFor(DiceRoll roll) => _establishments.ActivatedBy(roll).Total
 
 - `sealed` ist Standard für Klassen. Vererbung braucht eine Begründung.
 - Unveränderlichkeit ist Standard: `readonly` Felder, `init`-Properties nur an Grenzen, Werte-Objekte als `readonly record struct`.
+- IDs werden mit dem NuGet-Paket `StronglyTypedId` erzeugt. Keine nackten `Guid`-Werte und keine handgeschriebenen ID-Wrapper.
 - Fehler in der Domäne sind Domänenausnahmen (`InvalidMoveException`) oder Ergebnistypen, keine `ArgumentException` aus der Tiefe.
 - Defensive Prüfungen (`ArgumentOutOfRangeException.ThrowIfNegative`) stehen an Systemgrenzen und in Fabrikmethoden, nicht in jeder Methode.
 - Kommentare erklären Spielregeln oder Entscheidungen, nie den Code selbst. XML-Doku nur, wo der Name nicht reicht.

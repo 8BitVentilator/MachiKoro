@@ -39,7 +39,7 @@ MachiKoro.Client  ──►  MachiKoro.Contracts  ◄──  MachiKoro.Server
 
 | Projekt | Verantwortung | Darf referenzieren |
 |---|---|---|
-| `MachiKoro.Domain` | Spielregeln. `Game`-Aggregat, Werte-Objekte, Kommandos, Ereignisse, Kartenkatalog. Nur BCL. | nichts |
+| `MachiKoro.Domain` | Spielregeln. `Game`-Aggregat, Werte-Objekte, Kommandos, Ereignisse, Kartenkatalog. Nur BCL; `StronglyTypedId` ist als Source Generator zur Buildzeit erlaubt. | nichts |
 | `MachiKoro.Application` | Anwendungsfälle als Vertical Slices. Schnittstellen für Ereignisspeicher und Seed-Quelle. | `Domain` |
 | `MachiKoro.Contracts` | Nachrichten zwischen Client und Server: Kommando-Records, Ereignis-Records, Fehlercodes. Reine Daten. | nichts |
 | `MachiKoro.Server` | ASP.NET-Core-Host mit SignalR. Lobby, Verbindungen, Übersetzung Contracts ↔ Application, Dateispeicher. | `Application`, `Contracts` |
@@ -167,7 +167,7 @@ Ein regelwidriger Zustand ist konstruktiv ausgeschlossen: Zustand entsteht nur a
 
 Architekturregeln als Tests:
 
-1. `Domain` referenziert keine Projekt-Assembly und keine Pakete.
+1. `Domain` referenziert keine Projekt-Assembly und keine Laufzeitpakete. Der Source Generator `StronglyTypedId` ist die einzige erlaubte Paketabhängigkeit.
 2. `Application` referenziert nur `Domain`.
 3. `Client` referenziert nur `Contracts`.
 4. `Contracts` referenziert nichts.

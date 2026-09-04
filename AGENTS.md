@@ -25,7 +25,8 @@ Digitale Umsetzung des Brettspiels **Machi Koro** in C# 14 auf .NET 10. Solution
 2. **Analyzer sind Gesetz.** Warnungen sind Build-Fehler. Keine Regel unterdrücken (`#pragma`, `SuppressMessage`, `.editorconfig`), stattdessen den Code umbauen. Ausnahme nur nach ausdrücklicher Freigabe durch den Menschen, mit Begründung als Kommentar.
 3. **Object Calisthenics gelten für jeden Typ in `src/`.** Details in den Coding-Guidelines. Insbesondere: keine `else`, keine Getter/Setter, Primitive und Collections in eigene Typen wrappen, höchstens zwei Instanzvariablen.
 4. **Domänensprache.** Bezeichner heißen wie im Spiel: `Coins`, `Establishment`, `Landmark`, `DiceRoll`, `Player`, `Turn`. Keine Abkürzungen.
-5. **Vor dem Abschluss** einer Aufgabe müssen `dotnet build` und `dotnet test` grün sein. Der Stop-Hook prüft das und blockiert sonst.
+5. **IDs sind stark typisiert.** Für ID-Typen wird das NuGet-Paket `StronglyTypedId` verwendet; keine nackten `Guid`-Werte oder handgeschriebenen ID-Wrapper.
+6. **Vor dem Abschluss** einer Aufgabe müssen `dotnet build` und `dotnet test` grün sein. Der Stop-Hook prüft das und blockiert sonst.
 
 ## Arbeitsablauf pro Aufgabe
 
