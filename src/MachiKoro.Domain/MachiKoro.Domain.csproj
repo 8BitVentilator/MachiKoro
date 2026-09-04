@@ -5,4 +5,12 @@
     <Description>Spielregeln und Domänenmodell von Machi Koro. Keine Abhängigkeiten nach außen.</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="StronglyTypedId" PrivateAssets="all" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Identifiers\guid-domain.typedid" />
+  </ItemGroup>
+
 </Project>

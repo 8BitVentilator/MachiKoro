@@ -1,0 +1,21 @@
+partial struct PLACEHOLDERID : global::System.IEquatable<PLACEHOLDERID>
+{
+    private readonly global::System.Guid _value;
+
+    public PLACEHOLDERID(global::System.Guid value)
+    {
+        _value = value;
+    }
+
+    public bool Equals(PLACEHOLDERID other) => _value.Equals(other._value);
+
+    public override bool Equals(object? value) => value is PLACEHOLDERID other && Equals(other);
+
+    public override int GetHashCode() => _value.GetHashCode();
+
+    public override string ToString() => _value.ToString();
+
+    public static bool operator ==(PLACEHOLDERID left, PLACEHOLDERID right) => left.Equals(right);
+
+    public static bool operator !=(PLACEHOLDERID left, PLACEHOLDERID right) => !left.Equals(right);
+}
