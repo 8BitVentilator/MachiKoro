@@ -37,12 +37,21 @@ dotnet format  MachiKoro.slnx --verify-no-changes   # nur prüfen (CI)
 | `.editorconfig` | Formatierung, Namensregeln, Schweregrad jeder Analyzer-Regel |
 | `tests/.editorconfig` | Lockerungen für Testprojekte |
 | `CodeMetricsConfig.txt` | Grenzwerte der .NET-Metrikregeln CA1502, CA1505, CA1506 |
-| `analyzers/MachiKoro.Analyzers/Rules.cs` | Grenzwerte der Object-Calisthenics-Regeln MK0001 bis MK0008 |
+| `analyzers/MachiKoro.Analyzers/Rules.cs` | Definitionen der projektspezifischen Regeln MK0001 bis MK0009 |
 | `src/Directory.Build.props` | Bindet `analyzers/MachiKoro.Analyzers` in jedes Produktionsprojekt ein |
 | `global.json` | SDK-Version und `dotnet test` auf Microsoft.Testing.Platform |
 | `nuget.config` | Nur nuget.org als Quelle (Central Package Management verlangt eindeutige Quelle) |
 
-Analyzer: `Microsoft.CodeAnalysis.NetAnalyzers` (im SDK, MIT), `Meziantou.Analyzer` (MIT), `Roslynator.Analyzers` (Apache-2.0), `MachiKoro.Analyzers` (eigen, Regeln MK0001 bis MK0008 siehe [coding-guidelines.md](coding-guidelines.md)). SonarAnalyzer.CSharp wird bewusst nicht eingesetzt: Die Sonar Source-Available License v1.0 schließt die Verarbeitung der Analyzer-Ausgabe durch KI-Werkzeuge aus, was dem Stop-Hook widerspricht.
+Analyzer: `Microsoft.CodeAnalysis.NetAnalyzers` (im SDK, MIT), `Meziantou.Analyzer` (MIT),
+`Roslynator.Analyzers` (Apache-2.0), `MachiKoro.Analyzers` (eigen, Regeln MK0001 bis MK0009 siehe
+[coding-guidelines.md](coding-guidelines.md)). SonarAnalyzer.CSharp wird bewusst nicht eingesetzt: Die Sonar
+Source-Available License v1.0 schließt die Verarbeitung der Analyzer-Ausgabe durch KI-Werkzeuge aus, was dem
+Stop-Hook widerspricht.
+
+`CS1591` ist für C#-Produktionscode unter `src/` als Fehler aktiv. Tests und Analyzer sind von dieser
+Dokumentationspflicht ausgenommen, behalten aber alle übrigen Build-Prüfungen. StronglyTypedId unterdrückt die
+Compilerdiagnose in generiertem Code; deshalb prüft MK0009 die öffentlich und geschützt deklarierten Member der
+projektgesteuerten `.typedid`-Templates direkt.
 
 ## Testprojekt (`dotnet test`)
 

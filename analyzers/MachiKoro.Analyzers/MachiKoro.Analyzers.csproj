@@ -8,7 +8,7 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsPackable>false</IsPackable>
     <RootNamespace>MachiKoro.Analyzers</RootNamespace>
-    <Description>Projekteigene Object-Calisthenics-Regeln, die kein Fremd-Analyzer abdeckt.</Description>
+    <Description>Projekteigene Regeln für Object Calisthenics und Generator-Template-Dokumentation.</Description>
   </PropertyGroup>
 
   <ItemGroup>

@@ -13,3 +13,4 @@ MK0005  | ObjectCalisthenics | Warning | Höchstens drei Parameter
 MK0006  | ObjectCalisthenics | Warning | Höchstens 120 nicht-leere Zeilen pro Datei
 MK0007  | ObjectCalisthenics | Warning | Zeilenlänge höchstens 120 Zeichen
 MK0008  | ObjectCalisthenics | Warning | Höchstens zwei Bedingungsoperatoren pro Ausdruck
+MK0009  | Documentation | Warning | Extern sichtbare Member in .typedid benötigen XML-Dokumentation

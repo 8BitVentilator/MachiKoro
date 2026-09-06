@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 namespace MachiKoro.Analyzers;
 
 /// <summary>
-/// Diagnosebeschreibungen und Grenzwerte der projekteigenen Object-Calisthenics-Regeln.
+/// Diagnosebeschreibungen und Grenzwerte der projekteigenen Regeln.
 /// </summary>
 internal static class Rules
 {
@@ -65,4 +65,10 @@ internal static class Rules
         "Einfache Ausdrücke",
         "Ausdruck hat {0} Bedingungsoperatoren (&&, ||, ?:), erlaubt sind {1}. Benenne Teilbedingungen als Methode.",
         Category, DiagnosticSeverity.Warning, isEnabledByDefault: true);
+
+    public static readonly DiagnosticDescriptor MissingTypedIdDocumentation = new(
+        "MK0009",
+        "Dokumentation für StronglyTypedId-Templates",
+        "Extern sichtbares Mitglied benötigt einen XML-Dokumentationskommentar",
+        "Documentation", DiagnosticSeverity.Warning, isEnabledByDefault: true);
 }

@@ -7,7 +7,7 @@ Drei Schichten setzen die Regeln durch:
 | Schicht | Was sie prüft | Wo konfiguriert |
 |---|---|---|
 | `dotnet format` | Formatierung, Style, automatisch behebbare Analyzer-Fixes | `.editorconfig`, Hooks in `.claude/settings.json` |
-| Analyzer im Build | Metriken, Unveränderlichkeit, tote Member, .NET-Regeln | `Directory.Build.props`, `.editorconfig`, `CodeMetricsConfig.txt`, `analyzers/MachiKoro.Analyzers` |
+| Analyzer im Build | Metriken, Unveränderlichkeit, Dokumentation, tote Member, .NET-Regeln | `Directory.Build.props`, `.editorconfig`, `CodeMetricsConfig.txt`, `analyzers/MachiKoro.Analyzers` |
 | Review (Mensch oder Agent) | Alles, was ein Analyzer nicht messen kann | Checkliste unten |
 
 Analyzer-Befunde werden **nie unterdrückt**, sondern durch Umbau des Codes gelöst.
@@ -32,7 +32,10 @@ Ergänzend gemessen: zyklomatische Komplexität ≤ 5 (CA1502), Wartbarkeitsinde
 
 ### Die MK-Regeln
 
-Alle Object-Calisthenics-Messungen liegen im Projekt `analyzers/MachiKoro.Analyzers` und werden über `src/Directory.Build.props` in jedes Produktionsprojekt eingebunden. Grenzwerte stehen als Konstanten in `Rules.cs`. Alle Abhängigkeiten des Projekts sind MIT- oder Apache-lizenziert.
+Die projekteigenen Regeln liegen im Projekt `analyzers/MachiKoro.Analyzers` und werden über
+`src/Directory.Build.props` in jedes Produktionsprojekt eingebunden. MK0001 bis MK0008 messen
+Object Calisthenics; MK0009 ergänzt die Dokumentationsprüfung für Generator-Templates. Grenzwerte stehen als
+Konstanten in `Rules.cs`. Alle Abhängigkeiten des Projekts sind MIT- oder Apache-lizenziert.
 
 | ID | Regel | Grenze |
 |---|---|---|
@@ -44,6 +47,7 @@ Alle Object-Calisthenics-Messungen liegen im Projekt `analyzers/MachiKoro.Analyz
 | MK0006 | Nicht-leere Zeilen pro Datei | 120 |
 | MK0007 | Zeichen pro Zeile | 120 |
 | MK0008 | Bedingungsoperatoren (`&&`, `\|\|`, `?:`) pro Ausdruck | 2 |
+| MK0009 | XML-Dokumentation extern sichtbarer Member in `.typedid`-Templates | vollständig |
 
 ### Beispiel
 
@@ -88,12 +92,32 @@ public Coins IncomeFor(DiceRoll roll) => _establishments.ActivatedBy(roll).Total
 - Fehler in der Domäne sind Domänenausnahmen (`InvalidMoveException`) oder Ergebnistypen, keine `ArgumentException` aus der Tiefe.
 - Defensive Prüfungen (`ArgumentOutOfRangeException.ThrowIfNegative`) stehen an Systemgrenzen und in Fabrikmethoden, nicht in jeder Methode.
 - Kommentare erklären Spielregeln oder Entscheidungen, nie den Code selbst.
-- Jede öffentliche Methode und Property besitzt einen XML-Dokumentationskommentar.
+- Die gesamte extern sichtbare Produktions-API ist nach den Regeln im folgenden Abschnitt dokumentiert.
 - File-scoped Namespaces, `using` außerhalb des Namespaces, ein Typ pro Datei, Dateiname = Typname.
+
+## API-Dokumentation
+
+Jeder explizit deklarierte öffentliche Typ und Member unter `src/` besitzt einen englischen
+XML-Dokumentationskommentar. Das gilt ebenso für geschützte Member eines extern sichtbaren Typs, also auch für
+Konstruktoren, Felder, Enum-Werte und geschützte Overrides. Eigenständige Dokumentation beschreibt den fachlichen
+Zweck in `<summary>` sowie alle Parameter. Rückgabewerte und ausdrücklich ausgelöste Ausnahmen werden mit
+`<returns>` beziehungsweise `<exception>` dokumentiert, wenn sie Teil des Vertrags sind.
+
+Overrides und Interface-Implementierungen verwenden `<inheritdoc/>`, wenn der geerbte Vertrag vollständig
+dokumentiert ist. Fachliche Positionsparameter eines Records werden mit `<param>` am Record dokumentiert;
+ausschließlich vom Compiler synthetisierte Standardmember benötigen keinen eigenen Kommentar.
+
+`CS1591` prüft normalen C#-Produktionscode. Projektgesteuerte `.typedid`-Templates werden zusätzlich durch MK0009
+geprüft, weil StronglyTypedId die Compilerdiagnose im generierten Code unterdrückt. Test- und Analyzer-Projekte sind
+von der Dokumentationspflicht ausgenommen, ihre übrigen Build-Regeln bleiben aktiv. Die Analyzer prüfen nur, ob ein
+Kommentar existiert. Englische Sprache, fachlicher Gehalt und Vollständigkeit der Vertragselemente bleiben
+Review-Aufgaben.
 
 ## Review-Checkliste
 
-Die Liste enthält nur, was kein Analyzer misst. Die Regeln 1, 2, 7 und 8 sowie Parameteranzahl, Zeilen- und Dateilänge und Ausdruckskomplexität fehlen hier absichtlich: Sie brechen den Build (MK0001 bis MK0008, MA0051) und brauchen kein Review.
+Die Liste enthält nur, was kein Analyzer misst. Die Regeln 1, 2, 7 und 8 sowie Parameteranzahl, Zeilen- und
+Dateilänge, Ausdruckskomplexität und das Vorhandensein von API-Kommentaren fehlen hier absichtlich: Sie brechen den
+Build (MK0001 bis MK0009, CS1591, MA0051) und brauchen kein Review.
 
 Vor dem Abschluss jeder Aufgabe für jeden geänderten Typ prüfen:
 
@@ -105,4 +129,4 @@ Vor dem Abschluss jeder Aufgabe für jeden geänderten Typ prüfen:
 - [ ] Ein Änderungsgrund pro Klasse (SRP)
 - [ ] Neues Verhalten als neuer Typ statt als neuer Zweig (OCP)
 - [ ] Domäne referenziert keine Infrastruktur (DIP)
-- [ ] Jede öffentliche Methode und Property besitzt einen XML-Dokumentationskommentar
+- [ ] API-Kommentare sind englisch, fachlich aussagekräftig und dokumentieren relevante Parameter, Rückgaben und Ausnahmen

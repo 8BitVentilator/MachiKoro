@@ -2,20 +2,40 @@ partial struct PLACEHOLDERID : global::System.IEquatable<PLACEHOLDERID>
 {
     private readonly global::System.Guid _value;
 
+    /// <summary>
+    /// Initializes a new identifier with the specified underlying value.
+    /// </summary>
+    /// <param name="value">The globally unique value represented by the identifier.</param>
     public PLACEHOLDERID(global::System.Guid value)
     {
         _value = value;
     }
 
+    /// <inheritdoc/>
     public bool Equals(PLACEHOLDERID other) => _value.Equals(other._value);
 
+    /// <inheritdoc/>
     public override bool Equals(object? value) => value is PLACEHOLDERID other && Equals(other);
 
+    /// <inheritdoc/>
     public override int GetHashCode() => _value.GetHashCode();
 
+    /// <inheritdoc/>
     public override string ToString() => _value.ToString();
 
+    /// <summary>
+    /// Determines whether two identifiers represent the same value.
+    /// </summary>
+    /// <param name="left">The first identifier to compare.</param>
+    /// <param name="right">The second identifier to compare.</param>
+    /// <returns><see langword="true"/> when both identifiers represent the same value; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(PLACEHOLDERID left, PLACEHOLDERID right) => left.Equals(right);
 
+    /// <summary>
+    /// Determines whether two identifiers represent different values.
+    /// </summary>
+    /// <param name="left">The first identifier to compare.</param>
+    /// <param name="right">The second identifier to compare.</param>
+    /// <returns><see langword="true"/> when the identifiers represent different values; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(PLACEHOLDERID left, PLACEHOLDERID right) => !left.Equals(right);
 }

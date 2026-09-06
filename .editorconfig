@@ -1,6 +1,6 @@
 # MachiKoro – Code-Style und Analyzer-Schweregrade
 # Formatierung wird durch `dotnet format` durchgesetzt (Hook nach jeder Dateiänderung + Quality Gate beim Abschluss).
-# Grenzwerte der .NET-Metrikregeln stehen in CodeMetricsConfig.txt, die der MK-Regeln in analyzers/MachiKoro.Analyzers/Rules.cs.
+# Grenzwerte der .NET-Metrik- und MK-Regeln stehen in CodeMetricsConfig.txt und analyzers/MachiKoro.Analyzers/Rules.cs.
 
 root = true
 
@@ -21,6 +21,9 @@ trim_trailing_whitespace = false
 # C#
 ###############################################################################
 [*.cs]
+
+# Extern sichtbare API muss nur in Produktionsprojekten dokumentiert sein; IDE0005 bleibt solutionweit aktiv.
+dotnet_diagnostic.CS1591.severity = none
 
 # --- Formatierung (IDE0055 = jede Abweichung ist ein Fehler) ------------------
 dotnet_diagnostic.IDE0055.severity = error
@@ -197,7 +200,7 @@ dotnet_diagnostic.CA5394.severity = none     # System.Random ist für Würfel ri
 dotnet_diagnostic.CA1848.severity = none     # LoggerMessage-Delegates
 dotnet_diagnostic.CA1716.severity = none     # Bezeichner, die mit VB-Schlüsselwörtern kollidieren
 
-# --- Projekt-Analyzer MachiKoro.Analyzers (analyzers/) – Object Calisthenics ----------
+# --- Projekt-Analyzer MachiKoro.Analyzers (analyzers/) --------------------------------
 dotnet_diagnostic.MK0001.severity = error    # OC 8 – höchstens zwei Instanzvariablen (Felder + Auto-Properties)
 dotnet_diagnostic.MK0002.severity = error    # OC 7 – höchstens zehn Methoden pro Typ
 dotnet_diagnostic.MK0003.severity = error    # OC 2 – kein else
@@ -228,3 +231,9 @@ dotnet_diagnostic.RCS1170.severity = error   # Auto-Property read-only machen (O
 dotnet_diagnostic.RCS1213.severity = error   # ungenutzte Member entfernen
 dotnet_diagnostic.RCS1163.severity = error   # ungenutzte Parameter
 dotnet_diagnostic.RCS1036.severity = error   # unnötige Leerzeilen
+
+[src/**/*.cs]
+dotnet_diagnostic.CS1591.severity = error    # fehlende XML-Dokumentation der Produktions-API
+
+[*.typedid]
+dotnet_diagnostic.MK0009.severity = error    # extern sichtbare Template-Member benötigen XML-Dokumentation

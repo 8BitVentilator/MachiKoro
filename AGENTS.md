@@ -6,7 +6,7 @@ Digitale Umsetzung des Brettspiels **Machi Koro** in C# 14 auf .NET 10. Solution
 
 | Pfad | Inhalt |
 |---|---|
-| `analyzers/MachiKoro.Analyzers` | Eigene Roslyn-Regeln MK0001 bis MK0008 (Object Calisthenics). Wird in alle `src/`-Projekte eingebunden. |
+| `analyzers/MachiKoro.Analyzers` | Eigene Roslyn-Regeln MK0001 bis MK0009 für Object Calisthenics und `.typedid`-Dokumentation. Wird in alle `src/`-Projekte eingebunden. |
 | `src/MachiKoro.Domain` | Spielregeln und Domänenmodell. Keine externen Abhängigkeiten. |
 | `tests/MachiKoro.Domain.Tests` | xUnit v3 + Shouldly. Ein Testprojekt pro Quellprojekt, gleiche Ordnerstruktur. |
 | `docs/` | Coding-, Test- und Build-Richtlinien (verbindlich) sowie die Spielregel-Referenz. |
@@ -26,7 +26,8 @@ Digitale Umsetzung des Brettspiels **Machi Koro** in C# 14 auf .NET 10. Solution
 3. **Object Calisthenics gelten für jeden Typ in `src/`.** Details in den Coding-Guidelines. Insbesondere: keine `else`, keine Getter/Setter, Primitive und Collections in eigene Typen wrappen, höchstens zwei Instanzvariablen.
 4. **Domänensprache.** Bezeichner heißen wie im Spiel: `Coins`, `Establishment`, `Landmark`, `DiceRoll`, `Player`, `Turn`. Keine Abkürzungen.
 5. **IDs sind stark typisiert.** Für ID-Typen wird das NuGet-Paket `StronglyTypedId` verwendet; keine nackten `Guid`-Werte oder handgeschriebenen ID-Wrapper.
-6. **Vor dem Abschluss** einer Aufgabe müssen `dotnet build` und `dotnet test` grün sein. Der Stop-Hook prüft das und blockiert sonst.
+6. **Produktions-API ist englisch dokumentiert.** `CS1591` prüft C# unter `src/`, MK0009 die `.typedid`-Templates. Tests und Analyzer sind nur von dieser Dokumentationspflicht ausgenommen.
+7. **Vor dem Abschluss** einer Aufgabe müssen `dotnet build` und `dotnet test` grün sein. Der Stop-Hook prüft das und blockiert sonst.
 
 ## Arbeitsablauf pro Aufgabe
 

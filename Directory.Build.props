@@ -17,14 +17,13 @@
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisLevel>latest-all</AnalysisLevel>
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
-    <!-- IDE0005 (unnötige usings) wird im Build nur mit Dokumentationsdatei geprüft; CS1591 (fehlender XML-Kommentar) bleibt aus. -->
+    <!-- IDE0005 benötigt die Dokumentationsdatei; CS1591 gilt per .editorconfig nur für Produktionscode unter src/. -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
 
   <!--
     Analyzer (alle MIT oder Apache-2.0). Schweregrade: .editorconfig, Metrik-Grenzwerte: CodeMetricsConfig.txt.
-    Object-Calisthenics-Regeln kommen aus dem eigenen Projekt analyzers/MachiKoro.Analyzers (siehe src/Directory.Build.props).
+    Projekteigene Regeln kommen aus analyzers/MachiKoro.Analyzers (siehe src/Directory.Build.props).
   -->
   <ItemGroup>
     <PackageReference Include="Meziantou.Analyzer" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers" />
