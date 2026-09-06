@@ -23,6 +23,18 @@ public sealed class CoinsTests
     }
 
     [Fact]
+    public void Receive_LargestRepresentableSum_ReturnsExactAmount()
+    {
+        Coins.Of(int.MaxValue - 1).Receive(Coins.Of(1)).ShouldBe(Coins.Of(int.MaxValue));
+    }
+
+    [Fact]
+    public void Receive_SumExceedsIntMaxValue_Throws()
+    {
+        Should.Throw<OverflowException>(() => Coins.Of(int.MaxValue).Receive(Coins.Of(1)));
+    }
+
+    [Fact]
     public void Pay_SufficientCoins_SubtractsCost()
     {
         Coins.Of(5).Pay(Coins.Of(2)).ShouldBe(Coins.Of(3));

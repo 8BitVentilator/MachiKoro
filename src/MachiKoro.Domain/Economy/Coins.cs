@@ -30,7 +30,8 @@ public readonly record struct Coins
     /// <summary>Adds received income to this amount.</summary>
     /// <param name="income">The income to add.</param>
     /// <returns>The combined coin amount.</returns>
-    public Coins Receive(Coins income) => new(_amount + income._amount);
+    /// <exception cref="OverflowException">The combined amount exceeds the supported range.</exception>
+    public Coins Receive(Coins income) => new(checked(_amount + income._amount));
 
     /// <summary>Pays as much of a cost as possible without making the amount negative.</summary>
     /// <param name="cost">The requested payment.</param>
