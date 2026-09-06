@@ -7,7 +7,14 @@
       "dotnet build*": "allow",
       "dotnet test*": "allow",
       "dotnet format*": "allow",
-      "dotnet restore*": "allow"
+      "dotnet restore*": "allow",
+      "dotnet --version": "allow",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git blame*": "allow",
+      "git show*": "allow",
+      "openspec*": "allow"
     }
   }
 }
