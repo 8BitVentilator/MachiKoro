@@ -14,7 +14,7 @@ public sealed class FamilyRestaurant : Establishment
     }
 
     public override ActivationNumbers ActivationNumbers =>
-        ActivationNumbers.Between(DiceRoll.Of(9), DiceRoll.Of(10));
+        ActivationNumbers.Between(DiceTotal.Of(9), DiceTotal.Of(10));
 
     public override Category Category => Category.Red;
 

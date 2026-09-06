@@ -11,7 +11,7 @@ public sealed class ForestTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.At(DiceRoll.Of(5)), Category.Blue, Industry.Gear, Coins.Of(3));
+            ActivationNumbers.At(DiceTotal.Of(5)), Category.Blue, Industry.Gear, Coins.Of(3));
 
         EstablishmentExpectation.From(new Forest(TestEstablishmentId.Create())).ShouldBe(expected);
     }

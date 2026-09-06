@@ -11,7 +11,7 @@ public sealed class Forest : Establishment
     {
     }
 
-    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceRoll.Of(5));
+    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceTotal.Of(5));
 
     public override Category Category => Category.Blue;
 

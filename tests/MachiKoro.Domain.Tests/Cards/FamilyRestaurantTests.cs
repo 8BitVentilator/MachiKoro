@@ -11,7 +11,7 @@ public sealed class FamilyRestaurantTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.Between(DiceRoll.Of(9), DiceRoll.Of(10)),
+            ActivationNumbers.Between(DiceTotal.Of(9), DiceTotal.Of(10)),
             Category.Red,
             Industry.Cup,
             Coins.Of(3));

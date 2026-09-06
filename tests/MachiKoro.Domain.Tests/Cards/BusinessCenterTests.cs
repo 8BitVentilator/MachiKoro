@@ -11,7 +11,7 @@ public sealed class BusinessCenterTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.At(DiceRoll.Of(6)), Category.Purple, Industry.Tower, Coins.Of(8));
+            ActivationNumbers.At(DiceTotal.Of(6)), Category.Purple, Industry.Tower, Coins.Of(8));
 
         EstablishmentExpectation.From(new BusinessCenter(TestEstablishmentId.Create())).ShouldBe(expected);
     }

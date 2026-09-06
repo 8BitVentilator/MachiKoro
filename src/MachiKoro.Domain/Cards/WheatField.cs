@@ -11,7 +11,7 @@ public sealed class WheatField : Establishment
     {
     }
 
-    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceRoll.Of(1));
+    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceTotal.Of(1));
 
     public override Category Category => Category.Blue;
 

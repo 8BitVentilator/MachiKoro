@@ -21,7 +21,7 @@ public sealed class WheatFieldTests
     {
         WheatField wheatField = CreateWheatField();
 
-        wheatField.IsActivatedBy(DiceRoll.Of(1)).ShouldBeTrue();
+        wheatField.IsActivatedBy(DiceRoll.Of(DieResult.Of(1))).ShouldBeTrue();
     }
 
     [Fact]
@@ -29,7 +29,7 @@ public sealed class WheatFieldTests
     {
         WheatField wheatField = CreateWheatField();
 
-        wheatField.IsActivatedBy(DiceRoll.Of(2)).ShouldBeFalse();
+        wheatField.IsActivatedBy(DiceRoll.Of(DieResult.Of(2))).ShouldBeFalse();
     }
 
     [Fact]

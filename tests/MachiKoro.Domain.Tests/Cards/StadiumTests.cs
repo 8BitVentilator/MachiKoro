@@ -11,7 +11,7 @@ public sealed class StadiumTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.At(DiceRoll.Of(6)), Category.Purple, Industry.Tower, Coins.Of(6));
+            ActivationNumbers.At(DiceTotal.Of(6)), Category.Purple, Industry.Tower, Coins.Of(6));
 
         EstablishmentExpectation.From(new Stadium(TestEstablishmentId.Create())).ShouldBe(expected);
     }

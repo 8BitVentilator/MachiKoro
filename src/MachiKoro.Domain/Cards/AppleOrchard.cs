@@ -13,7 +13,7 @@ public sealed class AppleOrchard : Establishment
     {
     }
 
-    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceRoll.Of(10));
+    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceTotal.Of(10));
 
     public override Category Category => Category.Blue;
 

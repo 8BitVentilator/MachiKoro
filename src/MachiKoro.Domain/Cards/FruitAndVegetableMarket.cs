@@ -14,7 +14,7 @@ public sealed class FruitAndVegetableMarket : Establishment
     }
 
     public override ActivationNumbers ActivationNumbers =>
-        ActivationNumbers.Between(DiceRoll.Of(11), DiceRoll.Of(12));
+        ActivationNumbers.Between(DiceTotal.Of(11), DiceTotal.Of(12));
 
     public override Category Category => Category.Green;
 

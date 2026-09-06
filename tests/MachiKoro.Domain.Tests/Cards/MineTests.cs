@@ -11,7 +11,7 @@ public sealed class MineTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.At(DiceRoll.Of(9)), Category.Blue, Industry.Gear, Coins.Of(6));
+            ActivationNumbers.At(DiceTotal.Of(9)), Category.Blue, Industry.Gear, Coins.Of(6));
 
         EstablishmentExpectation.From(new Mine(TestEstablishmentId.Create())).ShouldBe(expected);
     }

@@ -13,7 +13,7 @@ public sealed class Stadium : Establishment
     {
     }
 
-    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceRoll.Of(6));
+    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceTotal.Of(6));
 
     public override Category Category => Category.Purple;
 

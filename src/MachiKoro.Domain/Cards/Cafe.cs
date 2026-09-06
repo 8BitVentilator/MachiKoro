@@ -13,7 +13,7 @@ public sealed class Cafe : Establishment
     {
     }
 
-    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceRoll.Of(3));
+    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceTotal.Of(3));
 
     public override Category Category => Category.Red;
 

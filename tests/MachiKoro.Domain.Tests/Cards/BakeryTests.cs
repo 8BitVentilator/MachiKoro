@@ -11,7 +11,7 @@ public sealed class BakeryTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.Between(DiceRoll.Of(2), DiceRoll.Of(3)),
+            ActivationNumbers.Between(DiceTotal.Of(2), DiceTotal.Of(3)),
             Category.Green,
             Industry.Shop,
             Coins.Of(1));

@@ -11,7 +11,7 @@ public sealed class CafeTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.At(DiceRoll.Of(3)), Category.Red, Industry.Cup, Coins.Of(2));
+            ActivationNumbers.At(DiceTotal.Of(3)), Category.Red, Industry.Cup, Coins.Of(2));
 
         EstablishmentExpectation.From(new Cafe(TestEstablishmentId.Create())).ShouldBe(expected);
     }

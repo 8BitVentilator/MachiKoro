@@ -11,7 +11,7 @@ public sealed class FurnitureFactoryTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.At(DiceRoll.Of(8)), Category.Green, Industry.Factory, Coins.Of(3));
+            ActivationNumbers.At(DiceTotal.Of(8)), Category.Green, Industry.Factory, Coins.Of(3));
 
         EstablishmentExpectation.From(new FurnitureFactory(TestEstablishmentId.Create())).ShouldBe(expected);
     }

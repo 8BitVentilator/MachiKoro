@@ -11,7 +11,7 @@ public sealed class Ranch : Establishment
     {
     }
 
-    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceRoll.Of(2));
+    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceTotal.Of(2));
 
     public override Category Category => Category.Blue;
 

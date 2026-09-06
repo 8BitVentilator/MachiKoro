@@ -13,7 +13,7 @@ public sealed class FurnitureFactory : Establishment
     {
     }
 
-    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceRoll.Of(8));
+    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceTotal.Of(8));
 
     public override Category Category => Category.Green;
 

@@ -11,7 +11,7 @@ public sealed class CheeseFactoryTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.At(DiceRoll.Of(7)), Category.Green, Industry.Factory, Coins.Of(5));
+            ActivationNumbers.At(DiceTotal.Of(7)), Category.Green, Industry.Factory, Coins.Of(5));
 
         EstablishmentExpectation.From(new CheeseFactory(TestEstablishmentId.Create())).ShouldBe(expected);
     }

@@ -11,7 +11,7 @@ public sealed class ConvenienceStoreTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.At(DiceRoll.Of(4)), Category.Green, Industry.Shop, Coins.Of(2));
+            ActivationNumbers.At(DiceTotal.Of(4)), Category.Green, Industry.Shop, Coins.Of(2));
 
         EstablishmentExpectation.From(new ConvenienceStore(TestEstablishmentId.Create())).ShouldBe(expected);
     }

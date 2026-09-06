@@ -13,7 +13,7 @@ public sealed class ConvenienceStore : Establishment
     {
     }
 
-    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceRoll.Of(4));
+    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceTotal.Of(4));
 
     public override Category Category => Category.Green;
 

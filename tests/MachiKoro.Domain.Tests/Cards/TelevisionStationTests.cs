@@ -11,7 +11,7 @@ public sealed class TelevisionStationTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.At(DiceRoll.Of(6)), Category.Purple, Industry.Tower, Coins.Of(7));
+            ActivationNumbers.At(DiceTotal.Of(6)), Category.Purple, Industry.Tower, Coins.Of(7));
 
         EstablishmentExpectation.From(new TelevisionStation(TestEstablishmentId.Create())).ShouldBe(expected);
     }

@@ -11,7 +11,7 @@ public sealed class FruitAndVegetableMarketTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.Between(DiceRoll.Of(11), DiceRoll.Of(12)),
+            ActivationNumbers.Between(DiceTotal.Of(11), DiceTotal.Of(12)),
             Category.Green,
             Industry.Fruit,
             Coins.Of(2));

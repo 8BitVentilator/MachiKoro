@@ -12,7 +12,7 @@ public sealed class Bakery : Establishment
     }
 
     public override ActivationNumbers ActivationNumbers =>
-        ActivationNumbers.Between(DiceRoll.Of(2), DiceRoll.Of(3));
+        ActivationNumbers.Between(DiceTotal.Of(2), DiceTotal.Of(3));
 
     public override Category Category => Category.Green;
 

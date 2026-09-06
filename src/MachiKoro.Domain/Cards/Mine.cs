@@ -13,7 +13,7 @@ public sealed class Mine : Establishment
     {
     }
 
-    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceRoll.Of(9));
+    public override ActivationNumbers ActivationNumbers => ActivationNumbers.At(DiceTotal.Of(9));
 
     public override Category Category => Category.Blue;
 

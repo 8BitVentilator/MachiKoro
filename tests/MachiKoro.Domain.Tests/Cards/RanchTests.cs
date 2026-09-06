@@ -11,7 +11,7 @@ public sealed class RanchTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.At(DiceRoll.Of(2)), Category.Blue, Industry.Cow, Coins.Of(1));
+            ActivationNumbers.At(DiceTotal.Of(2)), Category.Blue, Industry.Cow, Coins.Of(1));
 
         EstablishmentExpectation.From(new Ranch(TestEstablishmentId.Create())).ShouldBe(expected);
     }

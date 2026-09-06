@@ -11,7 +11,7 @@ public sealed class AppleOrchardTests
     public void Definition_ReturnsCardRules()
     {
         EstablishmentExpectation expected = new(
-            ActivationNumbers.At(DiceRoll.Of(10)), Category.Blue, Industry.Wheat, Coins.Of(3));
+            ActivationNumbers.At(DiceTotal.Of(10)), Category.Blue, Industry.Wheat, Coins.Of(3));
 
         EstablishmentExpectation.From(new AppleOrchard(TestEstablishmentId.Create())).ShouldBe(expected);
     }
